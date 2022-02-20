@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<set>
+  <musicband>
+    <id>1</id>
+    <name>Led_Zepelin</name>
+    <coordinates>
+      <x>234.0</x>
+      <y>12.0</y>
+    </coordinates>
+    <creationDate>2022-02-20</creationDate>
+    <numberOfParticipants>2</numberOfParticipants>
+    <genre>JAZZ</genre>
+    <studio>
+      <adress>England</adress>
+    </studio>
+  </musicband>
+  <musicband>
+    <id>2</id>
+    <name>AC/DC</name>
+    <coordinates>
+      <x>234.0</x>
+      <y>92.0</y>
+    </coordinates>
+    <creationDate>2022-02-20</creationDate>
+    <numberOfParticipants>4</numberOfParticipants>
+    <description>Cool rock group</description>
+    <genre>PROGRESSIVE_ROCK</genre>
+    <studio>
+      <adress>Los-Andgeles 23.st</adress>
+    </studio>
+  </musicband>
+</set>

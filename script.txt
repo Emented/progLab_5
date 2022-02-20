@@ -1,0 +1,6 @@
+show
+history
+add name
+exit
+info
+help
