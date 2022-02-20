@@ -2,6 +2,7 @@ package com.emented.client.commandLine;
 
 import com.emented.client.annotations.ConsoleCommand;
 import com.emented.client.entities.CollectionOfMusicBands;
+import com.emented.client.exceptions.LoopPossibilityException;
 import com.emented.client.parser.XMLParser;
 
 import java.io.IOException;
@@ -218,7 +219,7 @@ public class CommandListener {
         sr.readCommandsFromFile(fileName);
         ArrayList<String> commands = sr.getCommandsFromFile();
         if (commands.contains("execute_script " + fileName)) {
-            throw new IllegalArgumentException("Внутри скрипта найден его вызов, возможно зацикливание");
+            throw new LoopPossibilityException("Внутри скрипта найден его вызов, возможно зацикливание");
         }
         for (String command : commands) {
             System.out.println(command);
