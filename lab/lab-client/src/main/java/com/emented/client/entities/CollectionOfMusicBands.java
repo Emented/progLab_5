@@ -1,10 +1,16 @@
 package com.emented.client.entities;
 
+import com.emented.client.comparators.StudioComparator;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
+
 
 @XStreamAlias("set")
 public class CollectionOfMusicBands {
@@ -121,8 +127,10 @@ public class CollectionOfMusicBands {
     }
 
     public String returnInfo() {
-        return "Тип коллекции: " + musicBands.getClass().toString().substring(6) + ", тип хранимых элементов: " + MusicBand.class.toString().substring(6) +  ", дата инициализации: " + dateOfInitialization +
-                ", количество элементов: " + musicBands.size() + ", файл коллекции: " + fileName;
+        final int size = 6;
+        return "Тип коллекции: " + musicBands.getClass().toString().substring(size) + ", тип хранимых элементов: "
+                + MusicBand.class.toString().substring(size) +  ", дата инициализации: " + dateOfInitialization
+                + ", количество элементов: " + musicBands.size() + ", файл коллекции: " + fileName;
     }
 
     public void show() {
@@ -133,18 +141,6 @@ public class CollectionOfMusicBands {
                 System.out.println(band);
             }
         }
-    }
-}
-
-class StudioComparator implements Comparator<MusicBand> {
-    @Override
-    public int compare(MusicBand a, MusicBand b) {
-        if (a.getStudio() == null) {
-            return -1;
-        } else if (b.getStudio() == null) {
-            return 1;
-        }
-        return a.getStudio().compareTo(b.getStudio());
     }
 }
 

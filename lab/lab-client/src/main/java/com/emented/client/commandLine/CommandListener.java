@@ -6,10 +6,16 @@ import com.emented.client.parser.XMLParser;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Map;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Locale;
 
 public class CommandListener {
-    private final int AMOUNT_OF_SAVED_COMMANDS = 9;
+    private final int dequeOverflow = 10;
     private final ArrayDeque<String> queueOfCommands = new ArrayDeque<>(9);
     private final Map<String, Method> availableCommands = new HashMap<>();
     private final CollectionOfMusicBands collectionInWork;
@@ -32,9 +38,9 @@ public class CommandListener {
         System.out.println("Доступные команды:");
         for (Method method : availableCommands.values()) {
             ConsoleCommand consoleCommand = method.getAnnotation(ConsoleCommand.class);
-            System.out.println("Название команды: " + consoleCommand.nameOfCommand() + ", " + "аргументы: " +
-                    ((consoleCommand.amountOfArgs() == 0) ? "команда не требует аргументов" : consoleCommand.args()) +
-                    ", описание: " + consoleCommand.description());
+            System.out.println("Название команды: " + consoleCommand.nameOfCommand() + ", " + "аргументы: "
+                    + ((consoleCommand.amountOfArgs() == 0) ? "команда не требует аргументов" : consoleCommand.args())
+                    + ", описание: " + consoleCommand.description());
         }
     }
 
@@ -199,8 +205,8 @@ public class CommandListener {
             System.out.println("Ошибка при вводе числа, попробуйте еще раз");
             return;
         }
-        System.out.println("Групп с количеством участников меньше чем " + finalNumber + ": " +
-                collectionInWork.countLessThanNumberOfParticipants(finalNumber));
+        System.out.println("Групп с количеством участников меньше чем " + finalNumber + ": "
+                + collectionInWork.countLessThanNumberOfParticipants(finalNumber));
     }
 
     @ConsoleCommand(nameOfCommand = "execute_script",
@@ -238,11 +244,12 @@ public class CommandListener {
                 Method methodOfCommand = availableCommands.get(commandName);
                 ConsoleCommand consoleCommand = methodOfCommand.getAnnotation(ConsoleCommand.class);
                 if (commandsArgs.length != consoleCommand.amountOfArgs()) {
-                    System.out.println("Неверное количество аргументов, команда " + commandName + " трубует " + consoleCommand.amountOfArgs() + " аргументов");
+                    System.out.println("Неверное количество аргументов, команда " + commandName + " требует "
+                            + consoleCommand.amountOfArgs() + " аргументов");
                 } else {
                     methodOfCommand.invoke(this, commandsArgs);
                     queueOfCommands.addFirst(commandName);
-                    if (queueOfCommands.size() == 10) {
+                    if (queueOfCommands.size() == dequeOverflow) {
                         queueOfCommands.pollLast();
                     }
                 }

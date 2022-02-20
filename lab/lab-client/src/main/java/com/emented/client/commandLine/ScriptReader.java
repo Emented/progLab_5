@@ -5,7 +5,6 @@ import com.emented.client.util.StreamUtil;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ScriptReader {
 

@@ -11,7 +11,7 @@ public class MusicBandGenerator {
     private final String name;
     private final MusicBand generatedMusicBand;
     private final Coordinates coordinates = new Coordinates();
-    Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
     public MusicBandGenerator(String name) {
         this.name = name;
@@ -48,8 +48,6 @@ public class MusicBandGenerator {
 
     private void getXCoordinate() {
         System.out.println("Введите координату X (ее значение должно быть не больше 947)");
-        Coordinates coordinates = new Coordinates();
-        generatedMusicBand.setCoordinates(coordinates);
         try {
             generatedMusicBand.getCoordinates().setX(sc.nextLine());
         } catch (NumberFormatException nfe) {

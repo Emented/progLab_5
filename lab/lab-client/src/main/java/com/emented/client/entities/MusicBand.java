@@ -110,13 +110,13 @@ public class MusicBand {
 
     @Override
     public String toString() {
-        return  "ID: " + id +
-                ", название: " + name +
-                ", координаты: " + coordinates +
-                ", дата создания: " + creationDate +
-                ", число участников: " + numberOfParticipants +
-                ", описание: " + ((description == null) ? "отстуствует" : description) +
-                ", жанр: " + ((genre == null) ? "не определен" : genre) +
-                ", " + ((studio == null) ? "студия отсутствует" : studio);
+        return  "ID: " + id
+                + ", название: " + name
+                + ", координаты: " + coordinates
+                + ", дата создания: " + creationDate
+                + ", число участников: " + numberOfParticipants
+                + ", описание: " + ((description == null) ? "отстуствует" : description)
+                + ", жанр: " + ((genre == null) ? "не определен" : genre)
+                + ", " + ((studio == null) ? "студия отсутствует" : studio);
     }
 }

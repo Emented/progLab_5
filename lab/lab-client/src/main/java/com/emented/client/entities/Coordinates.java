@@ -9,19 +9,19 @@ public class Coordinates {
     private Float y; //Максимальное значение поля: 104, Поле не может быть null
 
     public void setX(String x) {
-        double NEW_X = Double.parseDouble(x);
-        if (NEW_X >= MAX_X) {
+        double newX = Double.parseDouble(x);
+        if (newX >= MAX_X) {
             throw new IllegalArgumentException("Значение координаты по X должно быть меньше 947");
         }
-        this.x = NEW_X;
+        this.x = newX;
     }
 
     public void setY(String y) {
-        float NEW_Y = Float.parseFloat(y);
-        if (NEW_Y >= MAX_Y) {
+        float newY = Float.parseFloat(y);
+        if (newY >= MAX_Y) {
             throw new IllegalArgumentException("Значение координаты по Y должно быть меньше 104");
         }
-        this.y = NEW_Y;
+        this.y = newY;
     }
 
     public double getX() {
