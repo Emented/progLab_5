@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 public class StreamUtil {
     public String streamToString(FileInputStream file) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(file));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file));
         StringBuilder fString = new StringBuilder();
-        br.readLine();
-        String line = br.readLine();
+        bufferedReader.readLine();
+        String line = bufferedReader.readLine();
         while (line != null) {
             fString.append(line.trim());
-            line = br.readLine();
+            line = bufferedReader.readLine();
         }
-        br.close();
+        bufferedReader.close();
         return fString.toString();
     }
 
@@ -28,6 +28,7 @@ public class StreamUtil {
             commands.add(line);
             line = br.readLine();
         }
+        br.close();
         return commands;
     }
 }
