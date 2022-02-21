@@ -7,12 +7,35 @@ import com.emented.client.entities.Studio;
 
 import java.util.Scanner;
 
+/**
+ * Класс, предназанченный для генерации новой музыкальной группы
+ */
 public class MusicBandGenerator {
+
+    /**
+     * Имя новой музыкальной группы
+     */
     private final String name;
+
+    /**
+     * Новая музыкальная группа
+     */
     private final MusicBand generatedMusicBand;
+
+    /**
+     * Координаты новой музыкальной группы
+     */
     private final Coordinates coordinates = new Coordinates();
+
+    /**
+     * Сканер для считывания в интерактином режиме
+     */
     private final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Конструктор класса
+     * @param name Имя новой музыкальной группы
+     */
     public MusicBandGenerator(String name) {
         this.name = name;
         generatedMusicBand = new MusicBand();
@@ -20,6 +43,11 @@ public class MusicBandGenerator {
         setGivenVariables();
     }
 
+    /**
+     * Конструктор класса с заданным ID
+     * @param name Имя новой музыкальной группы
+     * @param id ID новой музыкальной группы
+     */
     public MusicBandGenerator(String name, Long id) {
         this.name = name;
         generatedMusicBand = new MusicBand();
@@ -28,10 +56,16 @@ public class MusicBandGenerator {
         setGivenVariables();
     }
 
+    /**
+     * Метод, устанавливающий имя для новой музыкальной группы
+     */
     private void getName() {
         generatedMusicBand.setName(this.name);
     }
 
+    /**
+     * Метод, считывающий число учатников с коммандной строки и устанавливающий его для новой муыкальной группы
+     */
     private void getNumberOfParticipants() {
         System.out.println("Введите число участников группы");
         try {
@@ -46,6 +80,9 @@ public class MusicBandGenerator {
 
     }
 
+    /**
+     * Метод, считывающий координату X с коммандной строки и устанавливающий ее для новой муыкальной группы
+     */
     private void getXCoordinate() {
         System.out.println("Введите координату X (ее значение должно быть не больше 947)");
         try {
@@ -59,6 +96,9 @@ public class MusicBandGenerator {
         }
     }
 
+    /**
+     * Метод, считывающий координату Y с коммандной строки и устанавливающий ее для новой муыкальной группы
+     */
     private void getYCoordinate() {
         System.out.println("Введите координату Y (ее значение должно быть не больше 104)");
         try {
@@ -72,6 +112,9 @@ public class MusicBandGenerator {
         }
     }
 
+    /**
+     * Метод, считывающий описание с коммандной строки и устанавливающий его для новой муыкальной группы
+     */
     private void getDescription() {
         System.out.println("Введите описание группы (для пропуска нажмите ENTER)");
         String desc = sc.nextLine();
@@ -82,6 +125,9 @@ public class MusicBandGenerator {
         }
     }
 
+    /**
+     * Метод, считывающий жанр с коммандной строки и устанавливающий его для новой муыкальной группы
+     */
     private void getMusicGenre() {
         System.out.println("Введите жанр музыки из предложенных ниже (для пропуска нажмите ENTER)");
         System.out.println(MusicGenre.show());
@@ -98,6 +144,9 @@ public class MusicBandGenerator {
         }
     }
 
+    /**
+     * Метод, считывающий студию с коммандной строки и устанавливающий ее для новой муыкальной группы
+     */
     private void getStudio() {
         System.out.println("Введите адрес студии (для пропуска нажмите ENTER)");
         String studio = sc.nextLine();
@@ -109,10 +158,16 @@ public class MusicBandGenerator {
         }
     }
 
+    /**
+     * Метод, устанавливающий переменные, переданные как аргументы
+     */
     public void setGivenVariables() {
         getName();
     }
 
+    /**
+     * Метод, устанавливающий переменные, считанные в интерактивном режиме
+     */
     public void setAnotherVariables() {
         getXCoordinate();
         getYCoordinate();
@@ -122,6 +177,10 @@ public class MusicBandGenerator {
         getStudio();
     }
 
+    /**
+     * Метод, возвращающий новую музыкальную группу
+     * @return Новая музыкальная группа
+     */
     public MusicBand getGeneratedMusicBand() {
         System.out.println("Создана новая музыкальная группа:");
         System.out.println(generatedMusicBand);

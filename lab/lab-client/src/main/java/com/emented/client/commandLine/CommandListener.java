@@ -15,13 +15,38 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Locale;
 
+/**
+ * Класс, отвечающий за считывание и выполнение команд
+ */
 public class CommandListener {
+
+    /**
+     * Константа, отвечающая за переполнения очереди
+     */
     private final int dequeOverflow = 10;
+
+    /**
+     * Очередь, хранящая историю команд
+     */
     private final ArrayDeque<String> queueOfCommands = new ArrayDeque<>(9);
+    /**
+     * Структура, хранящая название команды и метод, ее реализующий
+     */
     private final Map<String, Method> availableCommands = new HashMap<>();
+    /**
+     * Коллекция, с которой мы работаем
+     */
     private final CollectionOfMusicBands collectionInWork;
+    /**
+     * Экземпляр класса парсера для записи в файл
+     */
     private final XMLParser parser = new XMLParser();
 
+    /**
+     * Конструктор, принимающий класс коллекции групп, а так же заполняющий структуру доступных команд, используя
+     * рефлексию
+     * @param collectionOfMusicBands
+     */
     public CommandListener(CollectionOfMusicBands collectionOfMusicBands) {
         this.collectionInWork = collectionOfMusicBands;
         for (Method methodForCommand : CommandListener.class.getDeclaredMethods()) {
@@ -32,6 +57,9 @@ public class CommandListener {
         }
     }
 
+    /**
+     * Метод, реализующий команду help
+     */
     @ConsoleCommand(nameOfCommand = "help",
             args = "",
             description = "вывести справку по доступным командам")
@@ -45,6 +73,9 @@ public class CommandListener {
         }
     }
 
+    /**
+     * Метод, реализующий команду info
+     */
     @ConsoleCommand(nameOfCommand = "info",
             args = "",
             description = "вывести информацию о коллекции")
@@ -52,11 +83,17 @@ public class CommandListener {
         System.out.println(collectionInWork.returnInfo());
     }
 
+    /**
+     * Метод, реализующий команду show
+     */
     @ConsoleCommand(nameOfCommand = "show", args = "", description = "вывести все элементы коллекции и информацию о них")
     private void show() {
         collectionInWork.show();
     }
 
+    /**
+     * Метод, реализующий команду add
+     */
     @ConsoleCommand(nameOfCommand = "add",
             amountOfArgs = 1,
             args = "имя, далее будет вызван конструктор группы",
@@ -73,6 +110,9 @@ public class CommandListener {
         }
     }
 
+    /**
+     * Метод, реализующий команду exit
+     */
     @ConsoleCommand(nameOfCommand = "exit",
             args = "",
             description = "завершить работу с коллекцией (все ваши изменения будут утеряны)")
@@ -80,6 +120,9 @@ public class CommandListener {
         System.exit(0);
     }
 
+    /**
+     * Метод, реализующий команду history
+     */
     @ConsoleCommand(nameOfCommand = "history",
             args = "",
             description = "вывести последние 9 команд")
@@ -89,14 +132,24 @@ public class CommandListener {
         }
     }
 
+    /**
+     * Метод, реализующий команду clear
+     */
     @ConsoleCommand(nameOfCommand = "clear",
             args = "",
             description = "очистить коллекцию")
     private void clear() {
-        collectionInWork.clearCollection();
-        System.out.println("Коллекция очищена");
+        if (collectionInWork.getMusicBands().isEmpty()) {
+            System.out.println("Коллекция уже пуста");
+        } else {
+            collectionInWork.clearCollection();
+            System.out.println("Коллекция очищена");
+        }
     }
 
+    /**
+     * Метод, реализующий команду save
+     */
     @ConsoleCommand(nameOfCommand = "save",
             args = "",
             description = "сохранить коллекцию в файл")
@@ -105,6 +158,9 @@ public class CommandListener {
         System.out.println("Коллекция сохранена в файл");
     }
 
+    /**
+     * Метод, реализующий команду remove_by_id
+     */
     @ConsoleCommand(nameOfCommand = "remove_by_id",
             amountOfArgs = 1,
             args = "id",
@@ -121,6 +177,9 @@ public class CommandListener {
         System.out.println("Группа с ID: " + finalId + " удалена из коллекции");
     }
 
+    /**
+     * Метод, реализующий команду update
+     */
     @ConsoleCommand(nameOfCommand = "update",
             amountOfArgs = 2,
             args = "id, имя, далее будет вызван конструктор новой группы",
@@ -144,6 +203,9 @@ public class CommandListener {
         }
     }
 
+    /**
+     * Метод, реализующий команду add_if_max
+     */
     @ConsoleCommand(nameOfCommand = "add_if_max",
             amountOfArgs = 1,
             args = "имя, далее будет вызван конструктор новой группы",
@@ -158,6 +220,9 @@ public class CommandListener {
         }
     }
 
+    /**
+     * Метод, реализующий команду remove_greater
+     */
     @ConsoleCommand(nameOfCommand = "remove_greater",
             amountOfArgs = 1,
             args = "имя, далее будет вызван конструктор новой группы",
@@ -172,6 +237,9 @@ public class CommandListener {
         }
     }
 
+    /**
+     * Метод, реализующий команду remove_any_by_number_of_participants
+     */
     @ConsoleCommand(nameOfCommand = "remove_any_by_number_of_participants",
             amountOfArgs = 1,
             args = "число участников",
@@ -187,6 +255,9 @@ public class CommandListener {
         collectionInWork.removeAnyByNumberOfParticipants(finalNumber);
     }
 
+    /**
+     * Метод, реализующий команду min_by_studio
+     */
     @ConsoleCommand(nameOfCommand = "min_by_studio",
             args = "",
             description = "вывести любой объект из коллекции, значение поля studio которого является минимальным")
@@ -194,6 +265,9 @@ public class CommandListener {
         System.out.println(collectionInWork.returnMinByStudio());
     }
 
+    /**
+     * Метод, реализующий команду count_less_than_number_of_participants
+     */
     @ConsoleCommand(nameOfCommand = "count_less_than_number_of_participants",
             amountOfArgs = 1,
             args = "количество участников",
@@ -210,6 +284,9 @@ public class CommandListener {
                 + collectionInWork.countLessThanNumberOfParticipants(finalNumber));
     }
 
+    /**
+     * Метод, реализующий команду execute_script
+     */
     @ConsoleCommand(nameOfCommand = "execute_script",
             amountOfArgs = 1,
             args = "имя файла",
@@ -228,6 +305,9 @@ public class CommandListener {
         }
     }
 
+    /**
+     * Метод, считываюший команды с консоли и вызывающий их выполнение
+     */
     public void readCommandsFromConsole() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -236,6 +316,10 @@ public class CommandListener {
         }
     }
 
+    /**
+     * Метод, выполняющий команду
+     * @param command Команда для выполнения
+     */
     private void performCommand(String command) {
         String[] splitedString = command.split(" ");
         String commandName = splitedString[0].toLowerCase(Locale.ROOT);

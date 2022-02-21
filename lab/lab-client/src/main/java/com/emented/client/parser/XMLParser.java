@@ -11,16 +11,34 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
+/**
+ * Класс, реализующий парсинг XML файла, а так же запись в файл
+ */
 public class XMLParser {
 
+    /**
+     * Создаем экземпляр класса, отвечающего за парсинг файла
+     */
     private final XStream xStream = new XStream();
+    /**
+     * Создаем экземпляр класса, отвечающего за конвертацию потока в строку
+     */
     private final StreamUtil converter = new StreamUtil();
 
+    /**
+     * Метод, инициализирующий парсер
+     */
     private void initializeParser() {
         xStream.addPermission(AnyTypePermission.ANY);
         xStream.processAnnotations(CollectionOfMusicBands.class);
     }
 
+    /**
+     * Метод, считывающий коллекцию из XML файла
+     * @param fileName Имя исходного файла
+     * @return Экземпляр класса, хранящего в себе коллекцию
+     * @throws IOException Возможна ошибка доступа либо отсутствия файла по данному адресу
+     */
     public CollectionOfMusicBands readFromXML(String fileName) throws IOException {
         FileInputStream stream = new FileInputStream(fileName);
         initializeParser();
@@ -35,6 +53,12 @@ public class XMLParser {
         return collection;
     }
 
+    /**
+     * Метод, записывающий коллекцию в XML файл с указанным именем
+     * @param fileName Имя исходного файла
+     * @param musicBands Класс, содежащий коллекцию, которую необходимо записать
+     * @throws IOException Возможна ошибка доступа либо отсутствия файла по данному адресу
+     */
     public void writeToXML(String fileName, CollectionOfMusicBands musicBands) throws IOException {
         initializeParser();
         xStream.processAnnotations(CollectionOfMusicBands.class);
@@ -44,6 +68,11 @@ public class XMLParser {
         p.close();
     }
 
+    /**
+     * Метод, записывающий коллекцию в XML файл с именем указанным в классе коллекции
+     * @param musicBands Класс, содежащий коллекцию, которую необходимо записать
+     * @throws IOException Возможна ошибка доступа либо отсутствия файла по данному адресу
+     */
     public void writeToXMLofExistingInstance(CollectionOfMusicBands musicBands) throws IOException {
         initializeParser();
         xStream.processAnnotations(CollectionOfMusicBands.class);

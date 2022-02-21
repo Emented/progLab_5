@@ -1,5 +1,8 @@
 package com.emented.client.entities;
 
+/**
+ * ENUM, хранящий возможные жанры музыки
+ */
 public enum MusicGenre {
     PROGRESSIVE_ROCK,
     PSYCHEDELIC_CLOUD_RAP,
@@ -7,6 +10,10 @@ public enum MusicGenre {
     BLUES,
     BRIT_POP;
 
+    /**
+     * Метод, возвращающий строковое предстваление класса
+     * @return Строковое представление класса
+     */
     public static String show() {
         StringBuilder sb = new StringBuilder();
         for (MusicGenre j : values()) {
