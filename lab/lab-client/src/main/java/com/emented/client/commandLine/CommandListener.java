@@ -7,13 +7,7 @@ import com.emented.client.parser.XMLParser;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Класс, отвечающий за считывание и выполнение команд
@@ -311,8 +305,13 @@ public class CommandListener {
     public void readCommandsFromConsole() {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String line = sc.nextLine();
-            performCommand(line);
+            try {
+                String line = sc.nextLine();
+                performCommand(line);
+            } catch (NoSuchElementException e) {
+                System.out.println("Введен недопустимый символ");
+                System.exit(0);
+            }
         }
     }
 

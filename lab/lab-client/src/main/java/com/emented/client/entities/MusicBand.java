@@ -60,7 +60,7 @@ public class MusicBand {
      */
     public void setName(String name) {
         if ("".equals(name) || name == null) {
-            throw new IllegalArgumentException("Введено некоректное имя");
+            throw new IllegalArgumentException("Введено некорректное имя");
         }
         this.name = name;
     }

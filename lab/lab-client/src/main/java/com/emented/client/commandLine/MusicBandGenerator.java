@@ -5,6 +5,7 @@ import com.emented.client.entities.MusicBand;
 import com.emented.client.entities.MusicGenre;
 import com.emented.client.entities.Studio;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -76,6 +77,9 @@ public class MusicBandGenerator {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             getNumberOfParticipants();
+        } catch (NoSuchElementException e) {
+            System.out.println("Введен недопустимый символ");
+            System.exit(0);
         }
 
     }
@@ -93,6 +97,9 @@ public class MusicBandGenerator {
         } catch (IllegalArgumentException iae) {
             System.out.println(iae.getMessage());
             getXCoordinate();
+        } catch (NoSuchElementException e) {
+            System.out.println("Введен недопустимый символ");
+            System.exit(0);
         }
     }
 
@@ -109,6 +116,9 @@ public class MusicBandGenerator {
         } catch (IllegalArgumentException iae) {
             System.out.println(iae.getMessage());
             getYCoordinate();
+        } catch (NoSuchElementException e) {
+            System.out.println("Введен недопустимый символ");
+            System.exit(0);
         }
     }
 
@@ -117,11 +127,16 @@ public class MusicBandGenerator {
      */
     private void getDescription() {
         System.out.println("Введите описание группы (для пропуска нажмите ENTER)");
-        String desc = sc.nextLine();
-        if (!"".equals(desc)) {
-            generatedMusicBand.setDescription(desc);
-        } else {
-            generatedMusicBand.setDescription(null);
+        try {
+            String desc = sc.nextLine();
+            if (!"".equals(desc)) {
+                generatedMusicBand.setDescription(desc);
+            } else {
+                generatedMusicBand.setDescription(null);
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Введен недопустимый символ");
+            System.exit(0);
         }
     }
 
@@ -131,16 +146,19 @@ public class MusicBandGenerator {
     private void getMusicGenre() {
         System.out.println("Введите жанр музыки из предложенных ниже (для пропуска нажмите ENTER)");
         System.out.println(MusicGenre.show());
-        String genre = sc.nextLine();
-        if (!"".equals(genre)) {
-            try {
-                generatedMusicBand.setGenre(genre);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Ошибка при вводе жанра");
-                getMusicGenre();
+        try {
+            String genre = sc.nextLine();
+            if (!"".equals(genre)) {
+                    generatedMusicBand.setGenre(genre);
+                } else {
+                generatedMusicBand.setGenre("null");
             }
-        } else {
-            generatedMusicBand.setGenre("null");
+        } catch (NoSuchElementException e) {
+            System.out.println("Введен недопустимый символ");
+            System.exit(0);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка при вводе жанра");
+            getMusicGenre();
         }
     }
 
@@ -149,12 +167,17 @@ public class MusicBandGenerator {
      */
     private void getStudio() {
         System.out.println("Введите адрес студии (для пропуска нажмите ENTER)");
-        String studio = sc.nextLine();
-        if (!"".equals(studio)) {
-            generatedMusicBand.setStudio(new Studio());
-            generatedMusicBand.getStudio().setAdress(studio);
-        } else {
-            generatedMusicBand.setStudio(null);
+        try {
+            String studio = sc.nextLine();
+            if (!"".equals(studio)) {
+                generatedMusicBand.setStudio(new Studio());
+                generatedMusicBand.getStudio().setAdress(studio);
+            } else {
+                generatedMusicBand.setStudio(null);
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Введен недопустимый символ");
+            System.exit(0);
         }
     }
 
