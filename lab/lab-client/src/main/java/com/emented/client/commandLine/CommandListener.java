@@ -7,7 +7,14 @@ import com.emented.client.parser.XMLParser;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Map;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.NoSuchElementException;
 
 /**
  * Класс, отвечающий за считывание и выполнение команд
