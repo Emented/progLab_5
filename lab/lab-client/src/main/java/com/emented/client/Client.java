@@ -15,8 +15,8 @@ public final class Client {
     public static void main(String[] args) throws IOException {
         XMLParser r = new XMLParser();
         try {
-            CollectionOfMusicBands cc = r.readFromXML(args[0]);
-//            CollectionOfMusicBands cc = r.readFromXML("MusicBands.xml");
+//            CollectionOfMusicBands cc = r.readFromXML(args[0]);
+            CollectionOfMusicBands cc = r.readFromXML("MusicBands.xml");
             CommandListener cl = new CommandListener(cc);
             cl.readCommandsFromConsole();
         } catch (FileNotFoundException e) {

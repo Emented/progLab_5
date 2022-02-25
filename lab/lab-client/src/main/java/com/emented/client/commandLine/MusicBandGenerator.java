@@ -72,13 +72,13 @@ public class MusicBandGenerator {
         try {
             generatedMusicBand.setNumberOfParticipants(sc.nextLine());
         } catch (NumberFormatException nfe) {
-            System.out.println("Неверный формат числа");
+            System.out.println("\u001B[31m" + "Неверный формат числа" + "\u001B[0m");
             getNumberOfParticipants();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println("\u001B[31m" + e.getMessage() + "\u001B[0m");
             getNumberOfParticipants();
         } catch (NoSuchElementException e) {
-            System.out.println("Введен недопустимый символ");
+            System.out.println("\u001B[31m" + "Введен недопустимый символ" + "\u001B[0m");
             System.exit(0);
         }
 
@@ -92,13 +92,13 @@ public class MusicBandGenerator {
         try {
             generatedMusicBand.getCoordinates().setX(sc.nextLine());
         } catch (NumberFormatException nfe) {
-            System.out.println("Неверный формат числа");
+            System.out.println("\u001B[31m" + "Неверный формат числа" + "\u001B[0m");
             getXCoordinate();
         } catch (IllegalArgumentException iae) {
-            System.out.println(iae.getMessage());
+            System.out.println("\u001B[31m" + iae.getMessage() + "\u001B[0m");
             getXCoordinate();
         } catch (NoSuchElementException e) {
-            System.out.println("Введен недопустимый символ");
+            System.out.println("\u001B[31m" + "Введен недопустимый символ" + "\u001B[0m");
             System.exit(0);
         }
     }
@@ -111,13 +111,13 @@ public class MusicBandGenerator {
         try {
             generatedMusicBand.getCoordinates().setY(sc.nextLine());
         } catch (NumberFormatException nfe) {
-            System.out.println("Неверный формат числа");
+            System.out.println("\u001B[31m" + "Неверный формат числа" + "\u001B[0m");
             getYCoordinate();
         } catch (IllegalArgumentException iae) {
-            System.out.println(iae.getMessage());
+            System.out.println("\u001B[31m" + iae.getMessage() + "\u001B[0m");
             getYCoordinate();
         } catch (NoSuchElementException e) {
-            System.out.println("Введен недопустимый символ");
+            System.out.println("\u001B[31m" + "Введен недопустимый символ" + "\u001B[0m");
             System.exit(0);
         }
     }
@@ -135,7 +135,7 @@ public class MusicBandGenerator {
                 generatedMusicBand.setDescription(null);
             }
         } catch (NoSuchElementException e) {
-            System.out.println("Введен недопустимый символ");
+            System.out.println("\u001B[31m" + "Введен недопустимый символ" + "\u001B[0m");
             System.exit(0);
         }
     }
@@ -154,10 +154,10 @@ public class MusicBandGenerator {
                 generatedMusicBand.setGenre("null");
             }
         } catch (NoSuchElementException e) {
-            System.out.println("Введен недопустимый символ");
+            System.out.println("\u001B[31m" + "Введен недопустимый символ" + "\u001B[0m");
             System.exit(0);
         } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка при вводе жанра");
+            System.out.println("\u001B[31m" + "Ошибка при вводе жанра" + "\u001B[0m");
             getMusicGenre();
         }
     }
@@ -176,7 +176,7 @@ public class MusicBandGenerator {
                 generatedMusicBand.setStudio(null);
             }
         } catch (NoSuchElementException e) {
-            System.out.println("Введен недопустимый символ");
+            System.out.println("\u001B[31m" + "Введен недопустимый символ" + "\u001B[0m");
             System.exit(0);
         }
     }

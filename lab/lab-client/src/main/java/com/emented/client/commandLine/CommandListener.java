@@ -105,9 +105,9 @@ public class CommandListener {
             generator.setAnotherVariables();
             collectionInWork.addMusicBand(generator.getGeneratedMusicBand());
         } catch (NumberFormatException nfe) {
-            System.out.println("Ошибка при вводе числа");
+            System.out.println("\u001B[31m" + "Ошибка при вводе числа" + "\u001B[0m");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("\u001B[31m" + e.getMessage() + "\u001B[m");
         }
     }
 
@@ -141,7 +141,7 @@ public class CommandListener {
             description = "очистить коллекцию")
     private void clear() {
         if (collectionInWork.getMusicBands().isEmpty()) {
-            System.out.println("Коллекция уже пуста");
+            System.out.println("\u001B[31m" + "Коллекция уже пуста" + "\u001B[0m");
         } else {
             collectionInWork.clearCollection();
             System.out.println("Коллекция очищена");
@@ -171,7 +171,7 @@ public class CommandListener {
         try {
             finalId = Long.parseLong(id);
         } catch (NumberFormatException n) {
-            System.out.println("Ошибка при вводе числа, попробуйте еще раз");
+            System.out.println("\u001B[31m" + "Ошибка при вводе числа, попробуйте еще раз" + "\u001B[0m");
             return;
         }
         collectionInWork.removeBandById(finalId);
@@ -190,7 +190,7 @@ public class CommandListener {
         try {
             finalId = Long.parseLong(id);
         } catch (NumberFormatException n) {
-            System.out.println("Ошибка при вводе числа, попробуйте еще раз");
+            System.out.println("\u001B[31m" + "Ошибка при вводе числа, попробуйте еще раз" + "\u001B[0m");
             return;
         }
         try {
@@ -198,9 +198,9 @@ public class CommandListener {
             generator.setAnotherVariables();
             collectionInWork.updateById(finalId, generator.getGeneratedMusicBand());
         } catch (NumberFormatException nfe) {
-            System.out.println("Ошибка при вводе числа");
+            System.out.println("\u001B[31m" + "Ошибка при вводе числа" + "\u001B[0m");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("\u001B[31m" + e.getMessage() + "\u001B[0m");
         }
     }
 
@@ -217,7 +217,7 @@ public class CommandListener {
             generator.setAnotherVariables();
             collectionInWork.addIfMax(generator.getGeneratedMusicBand());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("\u001B[31m" + e.getMessage() + "\u001B[0m");
         }
     }
 
@@ -234,7 +234,7 @@ public class CommandListener {
             generator.setAnotherVariables();
             collectionInWork.removeIfGreater(generator.getGeneratedMusicBand());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("\u001B[31m" + e.getMessage() + "\u001B[0m");
         }
     }
 
@@ -250,7 +250,7 @@ public class CommandListener {
         try {
             finalNumber = Long.parseLong(numberOfParticipants);
         } catch (NumberFormatException n) {
-            System.out.println("Ошибка при вводе числа, попробуйте еще раз");
+            System.out.println("\u001B[31m" + "Ошибка при вводе числа, попробуйте еще раз" + "\u001B[0m");
             return;
         }
         collectionInWork.removeAnyByNumberOfParticipants(finalNumber);
@@ -278,7 +278,7 @@ public class CommandListener {
         try {
             finalNumber = Long.parseLong(numberOfParticipants);
         } catch (NumberFormatException n) {
-            System.out.println("Ошибка при вводе числа, попробуйте еще раз");
+            System.out.println("\u001B[31m" + "Ошибка при вводе числа, попробуйте еще раз" + "\u001B[0m");
             return;
         }
         System.out.println("Групп с количеством участников меньше чем " + finalNumber + ": "
@@ -297,7 +297,7 @@ public class CommandListener {
         sr.readCommandsFromFile(fileName);
         ArrayList<String> commands = sr.getCommandsFromFile();
         if (commands.contains("execute_script " + fileName)) {
-            throw new LoopPossibilityException("Внутри скрипта найден его вызов, возможно зацикливание");
+            throw new LoopPossibilityException("\u001B[31m" + "Внутри скрипта найден его вызов, возможно зацикливание" + "\u001B[0m");
         }
         for (String command : commands) {
             System.out.println(command);
@@ -316,7 +316,7 @@ public class CommandListener {
                 String line = sc.nextLine();
                 performCommand(line);
             } catch (NoSuchElementException e) {
-                System.out.println("Введен недопустимый символ");
+                System.out.println("\u001B[31m" + "Введен недопустимый символ" + "\u001B[0m");
                 System.exit(0);
             }
         }
@@ -335,8 +335,8 @@ public class CommandListener {
                 Method methodOfCommand = availableCommands.get(commandName);
                 ConsoleCommand consoleCommand = methodOfCommand.getAnnotation(ConsoleCommand.class);
                 if (commandsArgs.length != consoleCommand.amountOfArgs()) {
-                    System.out.println("Неверное количество аргументов, команда " + commandName + " требует "
-                            + consoleCommand.amountOfArgs() + " аргументов");
+                    System.out.println("\u001B[31m" + "Неверное количество аргументов, команда " + commandName + " требует "
+                            + consoleCommand.amountOfArgs() + " аргументов" + "\u001B[0m");
                 } else {
                     methodOfCommand.invoke(this, commandsArgs);
                     queueOfCommands.addFirst(commandName);
@@ -345,10 +345,10 @@ public class CommandListener {
                     }
                 }
             } else {
-                System.out.println("Такой команды не существует, для справки введите команду help");
+                System.out.println("\u001B[31m" + "Такой команды не существует, для справки введите команду help" + "\u001B[0m");
             }
         } catch (Exception exception) {
-            System.out.println(exception.getCause().getMessage());
+            System.out.println("\u001B[31m" + exception.getCause().getMessage() + "\u001B[0m");
         }
     }
 }
