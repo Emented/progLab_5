@@ -11,6 +11,7 @@ public class StudioComparator implements Comparator<MusicBand> {
 
     /**
      * Метод, сравнивающий два элемента коллекции
+     *
      * @param a Первый элемент коллекции
      * @param b Второй элемент коллекции
      * @return Целочисленное значение

@@ -2,8 +2,11 @@ package com.emented.client.entities;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
-import java.util.Locale;
 
 @XStreamAlias("musicband")
 public class MusicBand {
@@ -11,10 +14,17 @@ public class MusicBand {
      * Поле, отвечающее за счеткик IP
      */
     private static long currentId = 1;
-    private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; //Поле не может быть null
+    @NotNull
+    @PastOrPresent(message = "Коллекция не может иметь дату создания в будущем времени")
     private final java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    @NotNull
+    @Positive
+    private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    @NotBlank(message = "Имя должно содержать хотя бы 1 символ")
+    private String name; //Поле не может быть null, Строка не может быть пустой
+    @NotNull
+    private Coordinates coordinates; //Поле не может быть null
+    @Positive(message = "Количество учатников должно быть больше 0")
     private long numberOfParticipants; //Значение поля должно быть больше 0
     private String description; //Поле может быть null
     private MusicGenre genre; //Поле может быть null
@@ -36,18 +46,8 @@ public class MusicBand {
     }
 
     /**
-     * Метод, устанавливающий ID по данному
-     * @param id Новый ID
-     */
-    public void setId(Long id) {
-        if (id <= 0) {
-            throw new IllegalArgumentException("ID должен быть больше 0");
-        }
-        this.id = id;
-    }
-
-    /**
      * Метод, возвращающий ID
+     *
      * @return ID объекта
      */
     public Long getId() {
@@ -55,18 +55,26 @@ public class MusicBand {
     }
 
     /**
+     * Метод, устанавливающий ID по данному
+     *
+     * @param id Новый ID
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
      * Метод, устанавливающий имя объекта
+     *
      * @param name Новое имя
      */
     public void setName(String name) {
-        if ("".equals(name) || name == null) {
-            throw new IllegalArgumentException("Введено некорректное имя");
-        }
         this.name = name;
     }
 
     /**
      * Метод, возвращающий соординаты объекта
+     *
      * @return Координаты объекта
      */
     public Coordinates getCoordinates() {
@@ -75,17 +83,16 @@ public class MusicBand {
 
     /**
      * Метод, устанавливающий координаты объекта
+     *
      * @param coordinates Новые координаты
      */
     public void setCoordinates(Coordinates coordinates) {
-        if (coordinates == null) {
-            throw new IllegalArgumentException("Координаты не могут быть NULL");
-        }
         this.coordinates = coordinates;
     }
 
     /**
      * Метод, возвращающий число участников
+     *
      * @return Число участников
      */
     public long getNumberOfParticipants() {
@@ -94,17 +101,16 @@ public class MusicBand {
 
     /**
      * Метод, устанавливающий число участников
+     *
      * @param numberOfParticipants Новое число участников
      */
-    public void setNumberOfParticipants(String numberOfParticipants) {
-        if (Long.parseLong(numberOfParticipants) <= 0) {
-            throw new IllegalArgumentException("Количество участников должно быть больше 0");
-        }
-        this.numberOfParticipants = Long.parseLong(numberOfParticipants);
+    public void setNumberOfParticipants(Long numberOfParticipants) {
+        this.numberOfParticipants = numberOfParticipants;
     }
 
     /**
      * Метод, устанавливающий описание
+     *
      * @param description Новое описание
      */
     public void setDescription(String description) {
@@ -113,19 +119,16 @@ public class MusicBand {
 
     /**
      * Метод, устанавливающий жанр
+     *
      * @param genre Новый жанр
      */
-    public void setGenre(String genre) {
-        String newGenre = genre.toUpperCase(Locale.ROOT);
-        if ("NULL".equals(newGenre)) {
-            this.genre = null;
-        } else {
-            this.genre = MusicGenre.valueOf(newGenre);
-        }
+    public void setGenre(MusicGenre genre) {
+        this.genre = genre;
     }
 
     /**
      * Метод, возвращающий студию
+     *
      * @return Студия
      */
     public Studio getStudio() {
@@ -134,6 +137,7 @@ public class MusicBand {
 
     /**
      * Метод, устанавливающий студию
+     *
      * @param studio Новая студия
      */
     public void setStudio(Studio studio) {
@@ -142,6 +146,7 @@ public class MusicBand {
 
     /**
      * Метод сравнения
+     *
      * @param anotherBand Группа для сравнения
      * @return Целочисленное значение
      */
@@ -151,11 +156,12 @@ public class MusicBand {
 
     /**
      * Переопределение метода, возвращающего строковое представление класса
+     *
      * @return Строковое представление класса
      */
     @Override
     public String toString() {
-        return  "ID: " + id
+        return "ID: " + id
                 + ", название: " + name
                 + ", координаты: " + coordinates
                 + ", дата создания: " + creationDate

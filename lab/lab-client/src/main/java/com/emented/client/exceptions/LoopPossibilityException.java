@@ -7,6 +7,7 @@ public class LoopPossibilityException extends RuntimeException {
 
     /**
      * Конструктор исключения
+     *
      * @param message Сообщение, описывающее исключение
      */
     public LoopPossibilityException(String message) {

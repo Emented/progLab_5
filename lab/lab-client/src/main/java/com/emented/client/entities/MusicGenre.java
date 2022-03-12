@@ -12,6 +12,7 @@ public enum MusicGenre {
 
     /**
      * Метод, возвращающий строковое предстваление класса
+     *
      * @return Строковое представление класса
      */
     public static String show() {

@@ -18,20 +18,18 @@ public class ScriptReader {
 
     /**
      * Метод заполняющий коллекцию командами из файла
+     *
      * @param fileName Имя файла, в котором хранится скрипт
      */
-    public void readCommandsFromFile(String fileName) {
+    public void readCommandsFromFile(String fileName) throws IOException {
         final StreamUtil streamUtil = new StreamUtil();
-        try {
-            FileInputStream stream = new FileInputStream(fileName);
-            commandsFromFile = streamUtil.streamToArrayOfCommands(stream);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        FileInputStream stream = new FileInputStream(fileName);
+        commandsFromFile = streamUtil.streamToArrayOfCommands(stream);
     }
 
     /**
      * Метод, возвращающий коллекцию команд
+     *
      * @return Коллекция команд
      */
     public ArrayList<String> getCommandsFromFile() {

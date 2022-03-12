@@ -2,12 +2,15 @@ package com.emented.client.parser;
 
 import com.emented.client.entities.CollectionOfMusicBands;
 import com.emented.client.entities.MusicBand;
+import com.emented.client.util.OutputUtil;
 import com.emented.client.util.StreamUtil;
+import com.emented.client.validator.Validators;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 
-import java.io.IOException;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
@@ -35,6 +38,7 @@ public class XMLParser {
 
     /**
      * Метод, считывающий коллекцию из XML файла
+     *
      * @param fileName Имя исходного файла
      * @return Экземпляр класса, хранящего в себе коллекцию
      * @throws IOException Возможна ошибка доступа либо отсутствия файла по данному адресу
@@ -44,10 +48,17 @@ public class XMLParser {
         initializeParser();
         String xmlText = converter.streamToString(stream);
         stream.close();
-        CollectionOfMusicBands collection = (CollectionOfMusicBands) xStream.fromXML(xmlText);
+        CollectionOfMusicBands collection = null;
+        try {
+            collection = (CollectionOfMusicBands) xStream.fromXML(xmlText);
+        } catch (ConversionException e) {
+            OutputUtil.printErrorMessage("Ошибка при приведении типов");
+            System.exit(1);
+        }
         for (MusicBand band : collection.getMusicBands()) {
             band.setId();
         }
+        Validators.validateClass(collection);
         collection.setFileName(fileName);
         collection.setDateOfInitialization(LocalDate.now());
         return collection;
@@ -55,7 +66,8 @@ public class XMLParser {
 
     /**
      * Метод, записывающий коллекцию в XML файл с указанным именем
-     * @param fileName Имя исходного файла
+     *
+     * @param fileName   Имя исходного файла
      * @param musicBands Класс, содежащий коллекцию, которую необходимо записать
      * @throws IOException Возможна ошибка доступа либо отсутствия файла по данному адресу
      */
@@ -70,6 +82,7 @@ public class XMLParser {
 
     /**
      * Метод, записывающий коллекцию в XML файл с именем указанным в классе коллекции
+     *
      * @param musicBands Класс, содежащий коллекцию, которую необходимо записать
      * @throws IOException Возможна ошибка доступа либо отсутствия файла по данному адресу
      */

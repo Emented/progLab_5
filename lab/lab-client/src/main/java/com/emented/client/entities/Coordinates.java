@@ -1,5 +1,9 @@
 package com.emented.client.entities;
 
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+
 /**
  * Класс, хранящий координаты музыкальной студии
  */
@@ -8,49 +12,29 @@ public class Coordinates {
     /**
      * Константа, отвечающая за максимальную координату по X
      */
-    private static final double MAX_X = 947;
+    public static final long MAX_X = 947;
 
     /**
      * Константа, отвечающая за максимальную координату по Y
      */
-    private static final Float MAX_Y = 104F;
+    public static final long MAX_Y = 104;
 
     /**
      * Поле, хранящее в себе координату по X
      */
+    @Max(value = MAX_X, message = "координата по X должна быть меньше 947")
     private double x; //Максимальное значение поля: 947
 
     /**
      * Поле, хранящее в себе координату по Y
      */
+    @NotNull(message = "Координата по Y не может быть null")
+    @Max(value = MAX_Y, message = "Координата по Y должна быть меньше 104")
     private Float y; //Максимальное значение поля: 104, Поле не может быть null
 
     /**
-     * Метод, устанавливающий координату по X
-     * @param x Новая координата по X
-     */
-    public void setX(String x) {
-        double newX = Double.parseDouble(x);
-        if (newX >= MAX_X) {
-            throw new IllegalArgumentException("Значение координаты по X должно быть меньше 947");
-        }
-        this.x = newX;
-    }
-
-    /**
-     * Метод, устанавливающий координату по Y
-     * @param y Новая координата по Y
-     */
-    public void setY(String y) {
-        float newY = Float.parseFloat(y);
-        if (newY >= MAX_Y) {
-            throw new IllegalArgumentException("Значение координаты по Y должно быть меньше 104");
-        }
-        this.y = newY;
-    }
-
-    /**
      * Метод, возвращающий координату по X
+     *
      * @return координата X
      */
     public double getX() {
@@ -58,7 +42,17 @@ public class Coordinates {
     }
 
     /**
+     * Метод, устанавливающий координату по X
+     *
+     * @param newX Новая координата по X
+     */
+    public void setX(double newX) {
+        this.x = newX;
+    }
+
+    /**
      * Метод, возвращающий координату по Y
+     *
      * @return координата Y
      */
     public Float getY() {
@@ -66,7 +60,17 @@ public class Coordinates {
     }
 
     /**
+     * Метод, устанавливающий координату по Y
+     *
+     * @param newY Новая координата по Y
+     */
+    public void setY(Float newY) {
+        this.y = newY;
+    }
+
+    /**
      * Переопределение метода, возвращающего строковое представление класса
+     *
      * @return Строковое представление класса
      */
     @Override

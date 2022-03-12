@@ -1,7 +1,7 @@
 show
 history
-add name
+add
+execute_script script.txt
 exit
 info
 help
-execute_script script.txt
