@@ -1,7 +1,7 @@
 package com.emented.client.exceptions;
 
 /**
- * Unchecked исключение, отвечающее за возможность зациливания при выполенении скрипта
+ * Unchecked исключение, отвечающее за возможность зацикливания при выполенении скрипта
  */
 public class LoopPossibilityException extends RuntimeException {
 
