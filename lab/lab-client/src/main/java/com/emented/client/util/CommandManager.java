@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 
+/**
+ * Класс, создающий экземпляры комманд и отвечающий за их выполнение
+ */
 public class CommandManager {
     public static final HashMap<String, AbstractCommand> AVAILABLE_COMMANDS = new HashMap<>();
     public static CommandHistory historyOfCommands = new CommandHistory();

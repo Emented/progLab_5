@@ -24,7 +24,7 @@ public class SaveCommand extends AbstractCommand {
         try {
             Validators.validateAmountOfArgs(commandArgs, getAmountOfArgs());
             parser.writeToXMLofExistingInstance(collectionInWork);
-            System.out.println("Коллекция сохранена в файл");
+            OutputUtil.printSuccessfulMessage("Коллекция сохранена в файл");
         } catch (WrongAmountOfArgsException e) {
             OutputUtil.printErrorMessage(e.getMessage());
         } catch (IOException e) {

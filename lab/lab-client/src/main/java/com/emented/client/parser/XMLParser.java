@@ -88,7 +88,6 @@ public class XMLParser {
      */
     public void writeToXMLofExistingInstance(CollectionOfMusicBands musicBands) throws IOException {
         initializeParser();
-        xStream.processAnnotations(CollectionOfMusicBands.class);
         String text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xStream.toXML(musicBands.getMusicBands());
         PrintWriter p = new PrintWriter(musicBands.getFileName());
         p.write(text);

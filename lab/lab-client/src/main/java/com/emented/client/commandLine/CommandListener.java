@@ -15,6 +15,12 @@ import java.util.Scanner;
 public class CommandListener {
     public static CommandManager manager;
 
+    private static boolean performanceStatus = true;
+
+    public static void toggleStatus() {
+        performanceStatus = !performanceStatus;
+    }
+
     /**
      * Конструктор, принимающий класс коллекции групп, а так же заполняющий структуру доступных команд, используя
      * рефлексию
@@ -45,7 +51,7 @@ public class CommandListener {
      */
     public void readCommandsFromConsole() {
         Scanner sc = new Scanner(System.in);
-        while (true) {
+        while (performanceStatus) {
             try {
                 OutputUtil.printSuccessfulMessageOneStrip("Введите команду: ");
                 String line = sc.nextLine();

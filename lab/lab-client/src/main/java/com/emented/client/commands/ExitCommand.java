@@ -1,5 +1,6 @@
 package com.emented.client.commands;
 
+import com.emented.client.commandLine.CommandListener;
 import com.emented.client.exceptions.WrongAmountOfArgsException;
 import com.emented.client.util.OutputUtil;
 import com.emented.client.validator.Validators;
@@ -15,7 +16,7 @@ public class ExitCommand extends AbstractCommand {
         try {
             Validators.validateAmountOfArgs(commandArgs, getAmountOfArgs());
             System.out.println("Принудительный выход из программы");
-            System.exit(0);
+            CommandListener.toggleStatus();
         } catch (WrongAmountOfArgsException e) {
             OutputUtil.printErrorMessage(e.getMessage());
         }

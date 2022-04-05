@@ -1,5 +1,8 @@
 package com.emented.client.util;
 
+/**
+ * Класс, отвечающий за вывод информации в консоль
+ */
 public final class OutputUtil {
 
     private OutputUtil() { }

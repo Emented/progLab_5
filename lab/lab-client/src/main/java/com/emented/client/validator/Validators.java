@@ -18,12 +18,17 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Level;
 
+/**
+ * Класс, содержащий в себе методы валидации
+ */
 public final class Validators {
 
     private Validators() { }
 
     public static void validateClass(CollectionOfMusicBands collectionInWork) {
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
         for (MusicBand m : collectionInWork.getMusicBands()) {

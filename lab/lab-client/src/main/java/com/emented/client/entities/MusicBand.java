@@ -14,6 +14,7 @@ public class MusicBand {
      * Поле, отвечающее за счеткик IP
      */
     private static long currentId = 1;
+
     @NotNull
     @PastOrPresent(message = "Коллекция не может иметь дату создания в будущем времени")
     private final java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
